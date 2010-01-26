@@ -1,0 +1,14 @@
+Changes
+Makefile
+Makefile.PL
+MANIFEST
+pm_to_blib
+ppport.h
+README
+Udis86.bs
+Udis86.c
+Udis86.xs
+t/X86-Udis86.t
+fallback/const-c.inc
+fallback/const-xs.inc
+lib/X86/Udis86.pm
