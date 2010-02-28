@@ -13,16 +13,17 @@ BEGIN { use_ok('X86::Udis86') };
 # Insert your test code below, the Test::More module is use()ed here so read
 # its man page ( perldoc Test::More ) for help writing this test script.
 
+my $bytes = "\x8d\x4c\x24\x04\x83\xe4\xf0\xff\x71\xfc\x55\x89\xe5\x51";
 #my $bytes = chr(65) . chr(67) . chr(89) . chr(87) . chr(76) . chr(65) . chr(54) . chr(56) . chr(78) . chr(89) . chr(9) . chr(0) . chr(87);
-#warn "length BYTES is ", length $bytes,"\n";
-#warn "BYTES are $bytes\n";
+warn "length BYTES is ", length $bytes,"\n";
+warn "BYTES are $bytes\n";
 my $ud_obj = X86::Udis86->new;
 warn "\nREF is ", ref $ud_obj, "\n";
 ok( $ud_obj, "Pointer set");
 
-open BYTES, "/home/bob/src/disassemblers/X86-Udis86/bytes" or die "Can't open bytes, $!";
-$ud_obj->set_input_file(*BYTES);
-#$ud_obj->set_input_buffer($bytes, length(bytes));
+#open BYTES, "/home/bob/src/disassemblers/X86-Udis86/bytes" or die "Can't open bytes, $!";
+#$ud_obj->set_input_file(*BYTES);
+$ud_obj->set_input_buffer($bytes, length($bytes));
 $ud_obj->set_mode(32);
 $ud_obj->set_syntax("intel");
 $ud_obj->set_vendor("intel");
@@ -36,7 +37,7 @@ while($ud_obj->disassemble) {
        $ud_obj->insn_asm,"\n");
 }
 
-close BYTES;
+#close BYTES;
 ok( 1, "Finished OK");
 
 #65 67 89 87 76 65 54 56 78 89 09 00 87
