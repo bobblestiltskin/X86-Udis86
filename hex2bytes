@@ -1,0 +1,1 @@
+perl -e 'open HEX, "./hexbytes"; while (<HEX>) {chomp; print chr(hex($_));}; close HEX;'> bytes
