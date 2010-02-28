@@ -13,7 +13,7 @@ BEGIN { use_ok('X86::Udis86') };
 # Insert your test code below, the Test::More module is use()ed here so read
 # its man page ( perldoc Test::More ) for help writing this test script.
 
-#my $bytes = chr(0x65) . chr(0x67) . chr(0x89) . chr(0x87) . chr(0x76) . chr(0x65) . chr(0x54) . chr(0x56) . chr(0x78) . chr(0x89) . chr(0x09) . chr(0x00) . chr(0x87);
+#my $bytes = chr(65) . chr(67) . chr(89) . chr(87) . chr(76) . chr(65) . chr(54) . chr(56) . chr(78) . chr(89) . chr(9) . chr(0) . chr(87);
 #warn "length BYTES is ", length $bytes,"\n";
 #warn "BYTES are $bytes\n";
 my $ud_obj = X86::Udis86->new;
@@ -27,11 +27,13 @@ $ud_obj->set_mode(32);
 $ud_obj->set_syntax("intel");
 $ud_obj->set_vendor("intel");
 
-while(my $count = $ud_obj->disassemble) {
-#  warn "COUNT is ",$count;
-#  warn "LEN is ", $ud_obj->insn_len,"\n";
-#  warn "HEX is ", sprintf("%x", hex($ud_obj->insn_hex)),"\n";
-  warn "ASM is ", $ud_obj->insn_asm,"\n";
+while($ud_obj->disassemble) {
+#  warn "OFF is ",sprintf("%016x", $ud_obj->insn_off),
+#       " - HEX is ", sprintf("%-16x", hex($ud_obj->insn_hex)), 
+#       " - ASM is ", $ud_obj->insn_asm,"\n";
+  warn join(" ",sprintf("%016x", $ud_obj->insn_off),
+       sprintf("%-16x", hex($ud_obj->insn_hex)), 
+       $ud_obj->insn_asm,"\n");
 }
 
 close BYTES;
@@ -52,4 +54,3 @@ __DATA__
 09
 00
 87
-
