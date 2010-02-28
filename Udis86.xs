@@ -53,9 +53,9 @@ set_mode(self, mode)
         X86::Udis86 self
         int mode
         CODE:
-	fprintf(stderr, "BEFORE + mode is %d\n", my_ud_obj.dis_mode);
+#	fprintf(stderr, "BEFORE + mode is %d\n", my_ud_obj.dis_mode);
 	ud_set_mode(self, mode);
-	fprintf(stderr, "AFTER + mode is %d\n", my_ud_obj.dis_mode);
+#	fprintf(stderr, "AFTER + mode is %d\n", my_ud_obj.dis_mode);
 
 void 
 set_pc(self, pc)
@@ -83,12 +83,12 @@ set_vendor(self, vendor)
 	char *intel = "intel";
 	char *amd = "amd";
         CODE:
-	fprintf(stderr, "BEFORE + vendor is %d\n", my_ud_obj.vendor);
+#	fprintf(stderr, "BEFORE + vendor is %d\n", my_ud_obj.vendor);
         if (strncmp(vendor, intel, strlen(intel)) == 0)
 		ud_set_vendor(self, UD_VENDOR_INTEL);
         if (strncmp(vendor, amd, strlen(amd)) == 0)
 		ud_set_vendor(self, UD_VENDOR_AMD);
-	fprintf(stderr, "AFTER + mode is %d\n", my_ud_obj.vendor);
+#	fprintf(stderr, "AFTER + mode is %d\n", my_ud_obj.vendor);
 
 unsigned int 
 disassemble(self)
