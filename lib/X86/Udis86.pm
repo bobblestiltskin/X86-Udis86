@@ -58,8 +58,8 @@ XSLoader::load('X86::Udis86', $VERSION);
 # Preloaded methods go here.
 
 sub DESTROY {
-  print "Bye Cruel World!\n";
-  warn "Bye Cruel World!\n";
+#  print "Bye Cruel World!\n";
+#  warn "Bye Cruel World!\n";
 }
 
 # Autoload methods go after =cut, and are processed by the autosplit program.
