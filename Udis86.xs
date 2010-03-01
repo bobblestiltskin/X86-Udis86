@@ -9,6 +9,7 @@
 #include "const-c.inc"
 
 typedef ud_t *X86__Udis86;
+typedef ud_operand_t *X86__Udis86__Operand;
 
 static ud_t my_ud_obj;
 
@@ -152,7 +153,45 @@ input_skip(self, n);
 	ud_input_skip(self, n);
 
 #ud_mnemonic_code_t ud_obj->mnemonic
+
+int
+mnemonic(self)
+        X86::Udis86 self
+        CODE:
+        RETVAL = self->mnemonic;
+
+        OUTPUT:
+        RETVAL
+
+#ud_obj->pfx_rex
+#ud_obj->pfx_seg
+#ud_obj->pfx_opr
+#ud_obj->pfx_adr
+#ud_obj->pfx_lock
+#ud_obj->pfx_rep
+#ud_obj->pfx_repe
+#ud_obj->pfx_repne
 #
+#uint64_t ud_obj->pc
+
+MODULE = X86::Udis86		PACKAGE = X86::Udis86::Operand
+
+INCLUDE: const-xs.inc
+
+X86::Udis86::Operand
+new(CLASS)
+        char *CLASS
+        CODE:
+        ud_operand_t *ptr = (ud_operand_t *) calloc(1, sizeof(ud_operand_t));
+        if (ptr == NULL) {
+          fprintf(stderr, "No memory for alloc()\n");
+          exit(-1);
+        }
+	RETVAL = ptr;
+
+        OUTPUT:
+        RETVAL
+
 #ud_operand_t ud_obj->operand[n]
 #
 #ud_type_t ud_obj->operand[n].type
@@ -176,13 +215,3 @@ input_skip(self, n);
 #ud_obj->operand[n].lval.ptr.seg 
 #ud_obj->operand[n].lval.ptr.off
 #
-#ud_obj->pfx_rex
-#ud_obj->pfx_seg
-#ud_obj->pfx_opr
-#ud_obj->pfx_adr
-#ud_obj->pfx_lock
-#ud_obj->pfx_rep
-#ud_obj->pfx_repe
-#ud_obj->pfx_repne
-#
-#uint64_t ud_obj->pc
