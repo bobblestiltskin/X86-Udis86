@@ -1,3 +1,4 @@
 X86::Udis86		T_PTROBJ
+X86::Udis86::Operand	T_PTROBJ
 
 translator	*	T_PTROBJ
