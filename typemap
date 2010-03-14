@@ -2,3 +2,13 @@ X86::Udis86		T_PTROBJ
 X86::Udis86::Operand	T_PTROBJ
 
 translator	*	T_PTROBJ
+
+uint8_t			T_U_CHAR
+uint16_t		T_UV
+uint32_t		T_UV
+uint64_t		T_U_LONG
+
+int8_t			T_CHAR
+int16_t			T_IV
+int32_t			T_IV
+int64_t			T_IV
