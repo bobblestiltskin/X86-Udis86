@@ -620,6 +620,20 @@ XSLoader::load('X86::Udis86', $VERSION);
 
 # Preloaded methods go here.
 
+#sub new {
+#  my $proto = shift;
+#  my $class = ref($proto) || $proto;
+#  my $self = X86::Udis86::_new();
+#  bless $self, $class;
+#
+#  $self;
+#}
+
+sub operands {
+  my $self = shift;
+  return $self->_operands;
+}
+
 sub DESTROY {
 #  print "Bye Cruel World!\n";
 #  warn "Bye Cruel World!\n";
@@ -671,15 +685,6 @@ sub DESTROY {
 #   uint8_t               inp_sess[64];
 #   struct ud_itab_entry * itab_entry;
 # };
-
-#sub new {
-#  my $proto = shift;
-#  my $class = ref($proto) || $proto;
-#  my $self = X86::Udis86::_new();
-#  bless $self, $class;
-#
-#  $self;
-#}
 
 1;
 __END__
