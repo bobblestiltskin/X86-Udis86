@@ -16,6 +16,7 @@ while($ud_obj->disassemble) {
   print join(" ",sprintf("%016x", $ud_obj->insn_off),
        sprintf("%-16x", hex($ud_obj->insn_hex)),
        $ud_obj->insn_asm,"\n");
+  print "insn_len is ",$ud_obj->insn_len,"\n";
   print "pfx_rex is ",$ud_obj->pfx_rex,"\n";
   print "pfx_seg is ",$ud_obj->pfx_seg,"\n";
   print "pfx_opr is ",$ud_obj->pfx_opr,"\n";
