@@ -5,6 +5,8 @@ use strict;
 use warnings;
 use Carp;
 
+use X86::Udis86::Operand;
+
 require Exporter;
 use AutoLoader;
 
@@ -631,12 +633,34 @@ XSLoader::load('X86::Udis86', $VERSION);
 
 sub operands {
   my $self = shift;
-  return $self->_operands;
+  my @operands = $self->_operands;
+
+  use Devel::Peek;
+  print "HELLO FROM OPERANDS\n";
+  print "0 is ", $operands[0],"\n";
+  print "rEf 0 is ", ref $operands[0],"\n";
+#  print "TYPE 0 is ",$operands->[0]->type;
+#die;
+  print "rEf 1 is ", ref $operands[1],"\n";
+  print "rEf 2 is ", ref $operands[2],"\n";
+#  print "dumP 0 is ", Dump($operands[0]);
+#  print "dumP 1 is ", Dump($operands[1]);
+#  print "dumP 2 is ", Dump($operands[2]);
+#  Dump(\@operands);
+#  my $output;
+#  foreach my $operand (@operands) {
+#    my $hash = X86::Udis86::Operand::set($operand);
+#    push @$output, $hash;
+#  }
+#  print "END IN OPERANDS\n";
+
+#  return $output;
+  return \@operands;
 }
 
 sub DESTROY {
-#  print "Bye Cruel World!\n";
-#  warn "Bye Cruel World!\n";
+  print "Bye Cruel World!\n";
+  warn "Bye Cruel World!\n";
 }
 
 # Autoload methods go after =cut, and are processed by the autosplit program.
