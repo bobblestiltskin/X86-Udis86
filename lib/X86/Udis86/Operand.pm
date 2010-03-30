@@ -20,13 +20,12 @@ our @ISA = qw(Exporter);
 # If you do not need this, moving things directly into @EXPORT or @EXPORT_OK
 # will save memory.
 our %EXPORT_TAGS = ( 'all' => [ qw(
-	
+$udis_types
 ) ] );
 
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 
 our @EXPORT = qw(
-$udis_types
 );
 
 our $VERSION = '0.01';
@@ -214,9 +213,11 @@ sub dump {
 
 sub type {
   my $self = shift;
-#  my $type = $self->{type};
-#  my $string = $udis_types->[$type];
-#  print "TYPE : $type or $string\n";
+  return $self->{type};
+}
+
+sub type_as_string {
+  my $self = shift;
   return $udis_types->[$self->{type}];
 }
 
@@ -227,13 +228,21 @@ sub size {
 
 sub base {
   my $self = shift;
-#  return $self->{base};
+  return $self->{base};
+}
+
+sub base_as_string {
+  my $self = shift;
   return $udis_types->[$self->{base}];
 }
 
 sub index {
   my $self = shift;
-#  return $self->{index};
+  return $self->{index};
+}
+
+sub index_as_string {
+  my $self = shift;
   return $udis_types->[$self->{index}];
 }
 
@@ -300,6 +309,52 @@ sub lval_ptr_seg {
 sub lval_ptr_off {
   my $self = shift;
   return $self->{lval_ptr_off};
+}
+
+sub info {
+  my $self = shift;
+  my $index = shift;
+
+  print "Op $index type is ",$self->type,"\n";
+  print "Op $index type_as_string is ",$self->type_as_string,"\n";
+  print "Op $index size is ",$self->size,"\n";
+  if ($self->type_as_string eq "UD_OP_REG") {
+    print "Op $index base is ",$self->base,"\n";
+  }
+  if ($self->type_as_string eq "UD_OP_MEM") {
+    print "Op $index base is ",$self->base,"\n";
+    if ($self->index_as_string ne "UD_NONE") {
+      print "Op $index index is ",$self->index,"\n";
+    }
+    if ($self->scale) {
+      print "Op $index scale is ",$self->scale,"\n";
+    }
+    if ($self->offset) {
+      print "Op $index offset is ",$self->offset,"\n";
+    }
+    print "Op sbyte is ",$self->lval_sbyte,"\n";
+    print "Op ubyte is ",$self->lval_ubyte,"\n";
+    print "Op sword is ",$self->lval_sword,"\n";
+    print "Op uword is ",$self->lval_uword,"\n";
+    print "Op sdword is ",$self->lval_sdword,"\n";
+    print "Op udword is ",$self->lval_udword,"\n";
+    print "Op sqword is ",$self->lval_sqword,"\n";
+    print "Op uqword is ",$self->lval_uqword,"\n";
+  }
+  if ($self->type_as_string eq "UD_OP_PTR") {
+  }
+  if (($self->type_as_string eq "UD_OP_IMM") 
+   or ($self->type_as_string eq "UD_OP_JIMM") 
+   or ($self->type_as_string eq "UD_OP_CONST")) {
+    print "Op sbyte is ",$self->lval_sbyte,"\n";
+    print "Op ubyte is ",$self->lval_ubyte,"\n";
+    print "Op sword is ",$self->lval_sword,"\n";
+    print "Op uword is ",$self->lval_uword,"\n";
+    print "Op sdword is ",$self->lval_sdword,"\n";
+    print "Op udword is ",$self->lval_udword,"\n";
+    print "Op sqword is ",$self->lval_sqword,"\n";
+    print "Op uqword is ",$self->lval_uqword,"\n";
+  }
 }
 
 # Autoload methods go after =cut, and are processed by the autosplit program.
