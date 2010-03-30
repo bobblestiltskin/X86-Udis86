@@ -622,20 +622,24 @@ XSLoader::load('X86::Udis86', $VERSION);
 
 # Preloaded methods go here.
 
-#sub new {
-#  my $proto = shift;
-#  my $class = ref($proto) || $proto;
-#  my $self = X86::Udis86::_new();
-#  bless $self, $class;
-#
-#  $self;
-#}
-
 sub operands {
   my $self = shift;
   my @operands = $self->_operands;
 
   return \@operands;
+}
+
+sub pfx_info {
+  my $self = shift;
+
+  print "pfx_rex is ",$self->pfx_rex,"\n";
+  print "pfx_seg is ",$X86::Udis86::Operand::udis_types->[$self->pfx_seg],"\n";
+  print "pfx_opr is ",$self->pfx_opr,"\n";
+  print "pfx_adr is ",$self->pfx_adr,"\n";
+  print "pfx_lock is ",$self->pfx_lock,"\n";
+  print "pfx_rep is ",$self->pfx_rep,"\n";
+  print "pfx_repe is ",$self->pfx_repe,"\n";
+  print "pfx_repne is ",$self->pfx_repne,"\n";
 }
 
 sub DESTROY {
