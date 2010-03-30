@@ -315,16 +315,15 @@ sub info {
   my $self = shift;
   my $index = shift;
 
-  print "Op $index type is ",$self->type,"\n";
-  print "Op $index type_as_string is ",$self->type_as_string,"\n";
+  print "Op $index type is ",$self->type_as_string,"\n";
   print "Op $index size is ",$self->size,"\n";
   if ($self->type_as_string eq "UD_OP_REG") {
-    print "Op $index base is ",$self->base,"\n";
+    print "Op $index base is ",$self->base_as_string,"\n";
   }
   if ($self->type_as_string eq "UD_OP_MEM") {
-    print "Op $index base is ",$self->base,"\n";
+    print "Op $index base is ",$self->base_as_string,"\n";
     if ($self->index_as_string ne "UD_NONE") {
-      print "Op $index index is ",$self->index,"\n";
+      print "Op $index index is ",$self->index_as_string,"\n";
     }
     if ($self->scale) {
       print "Op $index scale is ",$self->scale,"\n";
