@@ -715,7 +715,7 @@ None by default. Exports @mnemonics on request.
 
 =head1 AUTHOR
 
-Bob Wilkinson, E<lt>bob@fourtheye.org<gt>
+Bob Wilkinson, E<lt>bob@fourtheye.orgE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
