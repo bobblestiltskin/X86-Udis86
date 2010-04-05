@@ -20,7 +20,7 @@ our @ISA = qw(Exporter);
 # If you do not need this, moving things directly into @EXPORT or @EXPORT_OK
 # will save memory.
 our %EXPORT_TAGS = ( 'all' => [ qw(
-	
+@mnemonics	
 ) ] );
 
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
@@ -698,41 +698,24 @@ __END__
 
 =head1 NAME
 
-X86::Udis86 - Perl extension for blah blah blah
+X86::Udis86 - Perl extension for the C disassembler Udis86.
 
 =head1 SYNOPSIS
 
   use X86::Udis86;
-  blah blah blah
 
 =head1 DESCRIPTION
 
-Stub documentation for X86::Udis86, created by h2xs. It looks like the
-author of the extension was negligent enough to leave the stub
-unedited.
-
-Blah blah blah.
+This module provides a Perl interface to the C disassembler Udis86.
+See http://udis86.sourceforge.net/
 
 =head2 EXPORT
 
-None by default.
-
-
-
-=head1 SEE ALSO
-
-Mention other useful documentation such as the documentation of
-related modules or operating system documentation (such as man pages
-in UNIX), or any relevant external documentation such as RFCs or
-standards.
-
-If you have a mailing list set up for your module, mention it here.
-
-If you have a web site set up for your module, mention it here.
+None by default. Exports @mnemonics on request.
 
 =head1 AUTHOR
 
-Bob Wilkinson, E<lt>bob@E<gt>
+Bob Wilkinson, E<lt>bob@fourtheye.org<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
