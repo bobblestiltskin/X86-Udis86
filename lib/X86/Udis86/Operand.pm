@@ -364,41 +364,23 @@ __END__
 
 =head1 NAME
 
-X86::Udis86::Operand - Perl extension for blah blah blah
+X86::Udis86::Operand - Perl extension for Udis86 operands.
 
 =head1 SYNOPSIS
 
   use X86::Udis86::Operand;
-  blah blah blah
 
 =head1 DESCRIPTION
 
-Stub documentation for X86::Udis86::Operand, created by h2xs. It looks like the
-author of the extension was negligent enough to leave the stub
-unedited.
-
-Blah blah blah.
+This provides methods for accessing operands in Udis86.
 
 =head2 EXPORT
 
 None by default.
 
-
-
-=head1 SEE ALSO
-
-Mention other useful documentation such as the documentation of
-related modules or operating system documentation (such as man pages
-in UNIX), or any relevant external documentation such as RFCs or
-standards.
-
-If you have a mailing list set up for your module, mention it here.
-
-If you have a web site set up for your module, mention it here.
-
 =head1 AUTHOR
 
-Bob Wilkinson, E<lt>bob@E<gt>
+Bob Wilkinson, E<lt>bob@fourtheye.org<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
