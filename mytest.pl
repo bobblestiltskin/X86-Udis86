@@ -22,7 +22,7 @@ while($ud_obj->disassemble) {
        $ud_obj->insn_asm,"\n");
   print "insn_len is ",$ud_obj->insn_len,"\n";
   print "pc is ",$ud_obj->pc,"\n";
-  $ud_obj->pfx_info;
+#  $ud_obj->pfx_info;
   my $operands = $ud_obj->operands;
 
   my $max = $ud_obj->insn_len < 3 ? $ud_obj->insn_len : 3;
