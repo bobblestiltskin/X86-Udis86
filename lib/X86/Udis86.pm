@@ -592,7 +592,7 @@ our @EXPORT = qw(
 	
 );
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 sub AUTOLOAD {
     # This AUTOLOAD is used to 'autoload' constants from the constant()
@@ -708,6 +708,13 @@ X86::Udis86 - Perl extension for the C disassembler Udis86.
 
 This module provides a Perl interface to the C disassembler Udis86.
 See http://udis86.sourceforge.net/
+
+The test program in t/X86-Udis86.t provides some indication of usage. 
+
+The file udis86.pdf distributed with the C library documents the 
+interface which has been followed in the Perl wrapper.
+
+If you would like more extensive documentation, write to me and ask!
 
 =head2 EXPORT
 

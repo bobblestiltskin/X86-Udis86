@@ -4,3 +4,5 @@ Revision history for Perl extension X86::Udis86.
 	- original version; created by h2xs 1.23 with options
 		-b 5.8.0 -O -a -n X86::Udis86 X86-Udis86/src/udis86.h
 
+0.02  Thu Nov 18 20:46:25 2010
+        - add checks to Makefile.PL for C library and refuse to build unless it exists

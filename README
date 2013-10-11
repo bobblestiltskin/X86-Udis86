@@ -23,13 +23,10 @@ To install this module type the following:
 
 DEPENDENCIES
 
-This module requires these other modules and libraries:
-
-  blah blah blah
+This module requires the udis86 disassembler for X86 and x86-64. This is
+available from http://sourceforge.net/projects/udis86/
 
 COPYRIGHT AND LICENCE
-
-Put the correct copyright and licence information here.
 
 Copyright (C) 2009 by Bob Wilkinson
 
