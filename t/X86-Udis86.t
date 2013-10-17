@@ -35,8 +35,7 @@ while($ud_obj->disassemble) {
   push @hex, $hex;
   my $asm = $ud_obj->insn_asm;
   push @asm, $asm;
-  my $mnemonic = $X86::Udis86::mnemonics[$ud_obj->mnemonic];
-  push @mnemonic, $mnemonic;
+  push @mnemonic, $ud_obj->mnemonic;
 #  warn join(" ",$offset, $hex, $asm, $mnemonic, "\n");
 }
 
@@ -48,7 +47,7 @@ ok($asm[0] eq "lea ecx, [esp+0x4]", "0 asm good");
 ok($mnemonic[0] eq "lea", "0 mnemonic good");
 ok($offset[1] eq '0000000000000004', "1 offset good");
 ok($hex[1] eq "83e4f0          ", "1 hex good");
-ok($asm[1] eq "and esp, 0xf0", "1 asm good");
+ok($asm[1] eq "and esp, 0xfffffff0", "1 asm good");
 ok($mnemonic[1] eq "and", "1 mnemonic good");
 ok($offset[2] eq '0000000000000007', "2 offset good");
 ok($hex[2] eq "ff71fc          ", "2 hex good");
