@@ -149,11 +149,11 @@ input_skip(self, n);
 
 #ud_mnemonic_code_t ud_obj->mnemonic
 
-unsigned int
+const char*
 mnemonic(self)
         X86::Udis86 self
         CODE:
-        RETVAL = self->mnemonic;
+        RETVAL = ud_lookup_mnemonic(ud_insn_mnemonic(self));
 
         OUTPUT:
         RETVAL
@@ -292,7 +292,7 @@ _operands(self)
 		hv_store(hash, "lval_ptr_off", 12, newSViv(self->operand[i].lval.ptr.off), 0);
 
  		op_iv = PTR2IV(hash);
- 		op_sv = (SV *) op_iv;
+ 		op_sv = newSViv(op_iv);
  		op_rv = newRV_inc(op_sv);
  		op_blessed = sv_bless(op_rv, gv_stashpv(class, 1));
  		PUSHs(sv_2mortal(op_blessed));
