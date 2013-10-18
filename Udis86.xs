@@ -113,7 +113,7 @@ insn_off(self)
         OUTPUT:
         RETVAL
 
-char* 
+const char* 
 insn_hex(self)
         X86::Udis86 self
         CODE:
@@ -131,7 +131,7 @@ insn_ptr(self)
         OUTPUT:
         RETVAL
 
-char* 
+const char* 
 insn_asm(self)
         X86::Udis86 self
         CODE:
