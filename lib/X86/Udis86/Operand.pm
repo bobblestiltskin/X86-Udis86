@@ -28,7 +28,7 @@ our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 our @EXPORT = qw(
 );
 
-our $VERSION = '0.01';
+our $VERSION = '0.03';
 
 our $udis_types = [ qw(
   UD_NONE
@@ -384,7 +384,7 @@ Bob Wilkinson, E<lt>bob@fourtheye.orgE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (C) 2009 by Bob Wilkinson
+Copyright (C) 2009, 2013 by Bob Wilkinson
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself, either Perl version 5.10.1 or,
