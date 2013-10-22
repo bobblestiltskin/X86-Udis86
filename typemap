@@ -1,7 +1,10 @@
 X86::Udis86		T_PTROBJ
 X86::Udis86::Operand	T_PTROBJ
+const X86::Udis86::Operand T_PTROBJ
 ud_operand_t	*	T_PTROBJ
-#X86::Udis86::Operand	T_PTR
+const ud_operand_t	*	T_PTROBJ
+enum ud_type		T_IV
+union ud_lval		T_IV
 
 translator	*	T_PTROBJ
 

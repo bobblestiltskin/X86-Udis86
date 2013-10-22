@@ -1,6 +1,7 @@
 #!/usr/bin/perl -w
 use strict;
 use X86::Udis86;
+use X86::Udis86::Operand qw(:all);
 
 use Data::Dumper;
 use Devel::Peek;
@@ -23,13 +24,15 @@ while($ud_obj->disassemble) {
   print "insn_len is ",$ud_obj->insn_len,"\n";
   print "pc is ",$ud_obj->pc,"\n";
 #  $ud_obj->pfx_info;
-  my $operands = $ud_obj->operands;
 
   my $max = $ud_obj->insn_len < 3 ? $ud_obj->insn_len : 3;
+#  my $operand = X86::Udis86::Operand->new;
+#print "OPERAND is ",Data::Dumper->Dump([$operand]);
   for (my $i=0; $i<$max; $i++) {
-    my $operand = $operands->[$i];
-    next if ($operand->type_as_string eq "UD_NONE");
-    $operand->info($i);
+    my $operand = $ud_obj->insn_opr($i);
+    if (defined $operand) {
+      $operand->info($i) unless ($operand->type_as_string eq "UD_NONE");
+    }
   }    
 }
 #close BYTES;

@@ -211,49 +211,19 @@ sub dump {
   print "OP is ",Data::Dumper->Dump([$self]),"\n";
 }
 
-sub type {
-  my $self = shift;
-  return $self->{type};
-}
-
 sub type_as_string {
   my $self = shift;
-  return $udis_types->[$self->{type}];
-}
-
-sub size {
-  my $self = shift;
-  return $self->{size};
-}
-
-sub base {
-  my $self = shift;
-  return $self->{base};
+  return $udis_types->[$self->type];
 }
 
 sub base_as_string {
   my $self = shift;
-  return $udis_types->[$self->{base}];
-}
-
-sub index {
-  my $self = shift;
-  return $self->{index};
+  return $udis_types->[$self->base];
 }
 
 sub index_as_string {
   my $self = shift;
-  return $udis_types->[$self->{index}];
-}
-
-sub scale {
-  my $self = shift;
-  return $self->{scale};
-}
-
-sub offset {
-  my $self = shift;
-  return $self->{offset};
+  return $udis_types->[$self->index];
 }
 
 sub lval {
@@ -331,29 +301,28 @@ sub info {
     if ($self->offset) {
       print "Op $index offset is ",$self->offset,"\n";
     }
-    print "Op sbyte is ",$self->lval_sbyte,"\n";
-    print "Op ubyte is ",$self->lval_ubyte,"\n";
-    print "Op sword is ",$self->lval_sword,"\n";
-    print "Op uword is ",$self->lval_uword,"\n";
-    print "Op sdword is ",$self->lval_sdword,"\n";
-    print "Op udword is ",$self->lval_udword,"\n";
-    print "Op sqword is ",$self->lval_sqword,"\n";
-    print "Op uqword is ",$self->lval_uqword,"\n";
+    $self->lval_info;
   }
   if ($self->type_as_string eq "UD_OP_PTR") {
   }
   if (($self->type_as_string eq "UD_OP_IMM") 
    or ($self->type_as_string eq "UD_OP_JIMM") 
    or ($self->type_as_string eq "UD_OP_CONST")) {
-    print "Op sbyte is ",$self->lval_sbyte,"\n";
-    print "Op ubyte is ",$self->lval_ubyte,"\n";
-    print "Op sword is ",$self->lval_sword,"\n";
-    print "Op uword is ",$self->lval_uword,"\n";
-    print "Op sdword is ",$self->lval_sdword,"\n";
-    print "Op udword is ",$self->lval_udword,"\n";
-    print "Op sqword is ",$self->lval_sqword,"\n";
-    print "Op uqword is ",$self->lval_uqword,"\n";
+     $self->lval_info;
   }
+}
+
+sub lval_info {
+  my $self = shift;
+
+  print "Op sbyte : raw is ",$self->lval_sbyte," and ord is ",ord($self->lval_sbyte),"\n";
+  print "Op ubyte is ",$self->lval_ubyte,"\n";
+  print "Op sword is ",$self->lval_sword,"\n";
+  print "Op uword is ",$self->lval_uword,"\n";
+  print "Op sdword is ",$self->lval_sdword,"\n";
+  print "Op udword is ",$self->lval_udword,"\n";
+  print "Op sqword is ",$self->lval_sqword,"\n";
+  print "Op uqword is ",$self->lval_uqword,"\n";
 }
 
 # Autoload methods go after =cut, and are processed by the autosplit program.

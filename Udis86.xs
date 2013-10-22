@@ -20,6 +20,168 @@ ud_t* _new()
 	return(&my_ud_obj);
 }
 
+MODULE = X86::Udis86		PACKAGE = X86::Udis86::Operand
+
+X86::Udis86::Operand
+new(CLASS)
+        char *CLASS
+        CODE:
+        ud_operand_t *operand = (ud_operand_t *)safemalloc( sizeof(ud_operand_t) );
+printf("making an operand\n");
+        if (operand == NULL)
+        {
+                fprintf(stderr, "out of memory\n");
+                exit(1);
+        }
+        RETVAL = operand;
+
+        OUTPUT:
+        RETVAL
+
+#        /* operand size */
+unsigned int
+size(self)
+        X86::Udis86::Operand self
+        CODE:
+        RETVAL = self->size;
+        OUTPUT:
+        RETVAL
+
+#        /* operand type */
+enum ud_type 
+type(self)
+        X86::Udis86::Operand self
+        CODE:
+        RETVAL = self->type;
+        OUTPUT:
+        RETVAL
+
+#        /* operand base */
+enum ud_type
+base(self)
+        X86::Udis86::Operand self
+        CODE:
+        RETVAL = self->base;
+        OUTPUT:
+        RETVAL
+
+#        /* operand index */
+enum ud_type
+index(self)
+        X86::Udis86::Operand self
+        CODE:
+        RETVAL = self->index;
+        OUTPUT:
+        RETVAL
+
+#        /* operand scale */
+unsigned int
+scale(self)
+        X86::Udis86::Operand self
+        CODE:
+        RETVAL = self->scale;
+        OUTPUT:
+        RETVAL
+
+#        /* operand offset */
+unsigned int
+offset(self)
+        X86::Udis86::Operand self
+        CODE:
+        RETVAL = self->offset;
+        OUTPUT:
+        RETVAL
+
+#        /* operand lval_sbyte */
+char
+lval_sbyte(self)
+        X86::Udis86::Operand self
+        CODE:
+        RETVAL = self->lval.sbyte;
+        OUTPUT:
+        RETVAL
+
+#        /* operand lval_ubyte */
+unsigned char
+lval_ubyte(self)
+        X86::Udis86::Operand self
+        CODE:
+        RETVAL = self->lval.ubyte;
+        OUTPUT:
+        RETVAL
+
+#        /* operand lval_sword */
+int
+lval_sword(self)
+        X86::Udis86::Operand self
+        CODE:
+        RETVAL = self->lval.sword;
+        OUTPUT:
+        RETVAL
+
+#        /* operand lval_uword */
+unsigned int
+lval_uword(self)
+        X86::Udis86::Operand self
+        CODE:
+        RETVAL = self->lval.uword;
+        OUTPUT:
+        RETVAL
+
+#        /* operand lval_sdword */
+int
+lval_sdword(self)
+        X86::Udis86::Operand self
+        CODE:
+        RETVAL = self->lval.sdword;
+        OUTPUT:
+        RETVAL
+
+#        /* operand lval_udword */
+unsigned int
+lval_udword(self)
+        X86::Udis86::Operand self
+        CODE:
+        RETVAL = self->lval.udword;
+        OUTPUT:
+        RETVAL
+
+#        /* operand lval_sqword */
+int
+lval_sqword(self)
+        X86::Udis86::Operand self
+        CODE:
+        RETVAL = self->lval.sqword;
+        OUTPUT:
+        RETVAL
+
+#        /* operand lval_uqword */
+unsigned int
+lval_uqword(self)
+        X86::Udis86::Operand self
+        CODE:
+        RETVAL = self->lval.uqword;
+        OUTPUT:
+        RETVAL
+
+#        /* operand lval_ptr_seg */
+unsigned int
+lval_ptr_seg(self)
+        X86::Udis86::Operand self
+        CODE:
+        RETVAL = self->lval.ptr.seg;
+        OUTPUT:
+        RETVAL
+
+#        /* operand lval_ptr_off */
+unsigned int
+lval_ptr_off(self)
+        X86::Udis86::Operand self
+        CODE:
+        RETVAL = self->lval.ptr.off;
+        OUTPUT:
+        RETVAL
+
 MODULE = X86::Udis86		PACKAGE = X86::Udis86
 
 INCLUDE: const-xs.inc
@@ -47,6 +209,13 @@ set_input_file(self, file)
         FILE *file
         CODE:
 	ud_set_input_file(self, file);
+
+# void
+# set_input_hook(self, hook)
+#         X86::Udis86 self
+#         int (*hook)(struct ud*));
+#         CODE:
+# 	ud_set_input_hook(self, hook);
 
 void
 set_mode(self, mode)
@@ -136,6 +305,18 @@ insn_asm(self)
         X86::Udis86 self
         CODE:
         RETVAL = ud_insn_asm(self);
+
+        OUTPUT:
+        RETVAL
+
+X86::Udis86::Operand
+#const ud_operand_t*
+#const X86::Udis86::Operand
+insn_opr(self, n)
+        X86::Udis86 self
+        int n
+        CODE:
+        RETVAL = ud_insn_opr(self, n);
 
         OUTPUT:
         RETVAL
@@ -256,45 +437,3 @@ pc(self)
 
         OUTPUT:
         RETVAL
-
-X86::Udis86::Operand *
-_operands(self)
-	X86::Udis86 self
-	PREINIT:
-	int i;
-	const char *class = "X86::Udis86::Operand";
-	IV op_iv;
-	SV *op_sv;
-	SV *op_rv;
-	SV *op_blessed;
-	HV * hash;
-        PPCODE:
-# We return a list of 3 objects of appropriate class
-	EXTEND(SP, 3);
-	for (i=0; i<3; i++) {
-		hash = newHV();
-
-		hv_store(hash, "type", 4, newSViv(self->operand[i].type), 0);
-		hv_store(hash, "size", 4, newSViv(self->operand[i].size), 0);
-		hv_store(hash, "base", 4, newSViv(self->operand[i].base), 0);
-		hv_store(hash, "index", 5, newSViv(self->operand[i].index), 0);
-		hv_store(hash, "scale", 5, newSViv(self->operand[i].scale), 0);
-		hv_store(hash, "offset", 6, newSViv(self->operand[i].offset), 0);
-		hv_store(hash, "lval_sbyte", 10, newSViv(self->operand[i].lval.sbyte), 0);
-		hv_store(hash, "lval_ubyte", 10, newSViv(self->operand[i].lval.ubyte), 0);
-		hv_store(hash, "lval_sword", 10, newSViv(self->operand[i].lval.sword), 0);
-		hv_store(hash, "lval_uword", 10, newSViv(self->operand[i].lval.uword), 0);
-		hv_store(hash, "lval_sdword", 11, newSViv(self->operand[i].lval.sdword), 0);
-		hv_store(hash, "lval_udword", 11, newSViv(self->operand[i].lval.udword), 0);
-		hv_store(hash, "lval_sqword", 11, newSViv(self->operand[i].lval.sqword), 0);
-		hv_store(hash, "lval_uqword", 11, newSViv(self->operand[i].lval.uqword), 0);
-		hv_store(hash, "lval_ptr_seg", 12, newSViv(self->operand[i].lval.ptr.seg), 0);
-		hv_store(hash, "lval_ptr_off", 12, newSViv(self->operand[i].lval.ptr.off), 0);
-
- 		op_iv = PTR2IV(hash);
- 		op_sv = newSViv(op_iv);
- 		op_rv = newRV_inc(op_sv);
- 		op_blessed = sv_bless(op_rv, gv_stashpv(class, 1));
- 		PUSHs(sv_2mortal(op_blessed));
-	}
-
