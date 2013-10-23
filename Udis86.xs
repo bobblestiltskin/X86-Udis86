@@ -218,6 +218,38 @@ set_input_file(self, file)
 # 	ud_set_input_hook(self, hook);
 
 void
+input_skip(self, n)
+        X86::Udis86 self
+	size_t n
+        CODE:
+	ud_input_skip(self, n);
+
+int
+input_end(self)
+        X86::Udis86 self
+        CODE:
+        RETVAL = ud_input_end(self);
+
+        OUTPUT:
+        RETVAL
+
+void 
+set_user_opaque_data(self, opaque)
+        X86::Udis86 self
+        void *opaque
+	CODE:
+	ud_set_user_opaque_data(self, opaque);
+
+void *
+get_user_opaque_data(self)
+        X86::Udis86 self
+        CODE:
+        RETVAL = ud_get_user_opaque_data(self);
+
+        OUTPUT:
+        RETVAL
+
+void
 set_mode(self, mode)
         X86::Udis86 self
         int mode
@@ -311,7 +343,7 @@ insn_asm(self)
 
 X86::Udis86::Operand
 #const ud_operand_t*
-#const X86::Udis86::Operand
+#const X86::Udis86::Operand*
 insn_opr(self, n)
         X86::Udis86 self
         int n
@@ -321,20 +353,24 @@ insn_opr(self, n)
         OUTPUT:
         RETVAL
 
-void 
-input_skip(self, n);
+enum ud_mnemonic_code
+insn_mnemonic(self)
         X86::Udis86 self
-	size_t n
         CODE:
-	ud_input_skip(self, n);
+        RETVAL = ud_insn_mnemonic(self);
+
+        OUTPUT:
+        RETVAL
+
 
 #ud_mnemonic_code_t ud_obj->mnemonic
 
 const char*
-mnemonic(self)
+lookup_mnemonic(self)
         X86::Udis86 self
         CODE:
         RETVAL = ud_lookup_mnemonic(ud_insn_mnemonic(self));
+#        RETVAL = ud_lookup_mnemonic(insn_mnemonic(self));
 
         OUTPUT:
         RETVAL

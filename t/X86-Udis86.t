@@ -35,7 +35,7 @@ while($ud_obj->disassemble) {
   push @hex, $hex;
   my $asm = $ud_obj->insn_asm;
   push @asm, $asm;
-  push @mnemonic, $ud_obj->mnemonic;
+  push @mnemonic, $ud_obj->lookup_mnemonic;
 #  warn join(" ",$offset, $hex, $asm, $mnemonic, "\n");
 }
 
