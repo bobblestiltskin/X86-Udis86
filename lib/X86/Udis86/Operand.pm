@@ -226,61 +226,6 @@ sub index_as_string {
   return $udis_types->[$self->index];
 }
 
-#sub lval {
-#  my $self = shift;
-#  return $self->{lval};
-#}
-#
-#sub lval_sbyte {
-#  my $self = shift;
-#  return $self->{lval_sbyte};
-#}
-#
-#sub lval_ubyte {
-#  my $self = shift;
-#  return $self->{lval_ubyte};
-#}
-#
-#sub lval_sword {
-#  my $self = shift;
-#  return $self->{lval_sword};
-#}
-#
-#sub lval_uword {
-#  my $self = shift;
-#  return $self->{lval_uword};
-#}
-#
-#sub lval_sdword {
-#  my $self = shift;
-#  return $self->{lval_sdword};
-#}
-#
-#sub lval_udword {
-#  my $self = shift;
-#  return $self->{lval_udword};
-#}
-#
-#sub lval_sqword {
-#  my $self = shift;
-#  return $self->{lval_sqword};
-#}
-#
-#sub lval_uqword {
-#  my $self = shift;
-#  return $self->{lval_uqword};
-#}
-#
-#sub lval_ptr_seg {
-#  my $self = shift;
-#  return $self->{lval_ptr_seg};
-#}
-#
-#sub lval_ptr_off {
-#  my $self = shift;
-#  return $self->{lval_ptr_off};
-#}
-
 sub info {
   my $self = shift;
   my $index = shift;
@@ -315,7 +260,8 @@ sub info {
 sub lval_info {
   my $self = shift;
 
-  print "Op sbyte : raw is ",$self->lval_sbyte," and ord is ",ord($self->lval_sbyte),"\n";
+#  print "Op sbyte : raw is ",$self->lval_sbyte, " and ord is ",ord($self->lval_sbyte), " or hex ord is ",sprintf("%#x", ord($self->lval_sbyte)),"\n";
+  print "Op sbyte : ",sprintf("%#x", ord($self->lval_sbyte)),"\n";
   print "Op ubyte is ",$self->lval_ubyte,"\n";
   print "Op sword is ",$self->lval_sword,"\n";
   print "Op uword is ",$self->lval_uword,"\n";

@@ -349,6 +349,7 @@ insn_opr(self, n)
         int n
         CODE:
         RETVAL = ud_insn_opr(self, n);
+#        ud_insn_opr(self, n);
 
         OUTPUT:
         RETVAL
@@ -370,7 +371,6 @@ lookup_mnemonic(self)
         X86::Udis86 self
         CODE:
         RETVAL = ud_lookup_mnemonic(ud_insn_mnemonic(self));
-#        RETVAL = ud_lookup_mnemonic(insn_mnemonic(self));
 
         OUTPUT:
         RETVAL
