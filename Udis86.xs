@@ -9,7 +9,7 @@
 #include "const-c.inc"
 
 typedef ud_t *X86__Udis86;
-typedef ud_operand_t *X86__Udis86__Operand;
+typedef const ud_operand_t *X86__Udis86__Operand;
 
 static ud_t my_ud_obj;
 
@@ -22,21 +22,20 @@ ud_t* _new()
 
 MODULE = X86::Udis86		PACKAGE = X86::Udis86::Operand
 
-X86::Udis86::Operand
-new(CLASS)
-        char *CLASS
-        CODE:
-        ud_operand_t *operand = (ud_operand_t *)safemalloc( sizeof(ud_operand_t) );
-printf("making an operand\n");
-        if (operand == NULL)
-        {
-                fprintf(stderr, "out of memory\n");
-                exit(1);
-        }
-        RETVAL = operand;
-
-        OUTPUT:
-        RETVAL
+ #X86::Udis86::Operand
+ #new(CLASS)
+ #        char *CLASS
+ #        CODE:
+ #        ud_operand_t *operand = (ud_operand_t *)safemalloc( sizeof(ud_operand_t) );
+ #        if (operand == NULL)
+ #        {
+ #                fprintf(stderr, "out of memory\n");
+ #                exit(1);
+ #        }
+ #        RETVAL = operand;
+ #
+ #        OUTPUT:
+ #        RETVAL
 
 #        /* operand size */
 unsigned int
@@ -210,12 +209,12 @@ set_input_file(self, file)
         CODE:
 	ud_set_input_file(self, file);
 
-# void
-# set_input_hook(self, hook)
-#         X86::Udis86 self
-#         int (*hook)(struct ud*));
-#         CODE:
-# 	ud_set_input_hook(self, hook);
+ #void
+ #set_input_hook(self, hook)
+ #        X86::Udis86 self
+ #        int (*hook)(struct ud*));
+ #        CODE:
+ #	ud_set_input_hook(self, hook);
 
 void
 input_skip(self, n)
@@ -342,14 +341,16 @@ insn_asm(self)
         RETVAL
 
 X86::Udis86::Operand
+#const X86::Udis86::Operand
 #const ud_operand_t*
 #const X86::Udis86::Operand*
 insn_opr(self, n)
         X86::Udis86 self
         int n
         CODE:
-        RETVAL = ud_insn_opr(self, n);
-#        ud_insn_opr(self, n);
+#        RETVAL = (ud_operand_t *) ud_insn_opr(self, n);
+        RETVAL = (const ud_operand_t *) ud_insn_opr(self, n);
+#        RETVAL = ud_insn_opr(self, n);
 
         OUTPUT:
         RETVAL

@@ -13,9 +13,6 @@ BEGIN {
 
 #########################
 
-# Insert your test code below, the Test::More module is use()ed here so read
-# its man page ( perldoc Test::More ) for help writing this test script.
-
 my $bytes = "\x8d\x4c\x24\x04\x83\xe4\xf0\xff\x71\xfc\x55\x89\xe5\x51";
 my $ud_obj = X86::Udis86->new;
 ok($ud_obj, "Pointer set");

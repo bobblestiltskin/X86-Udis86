@@ -1,6 +1,6 @@
 X86::Udis86		T_PTROBJ
 X86::Udis86::Operand	T_PTROBJ
-#const X86::Udis86::Operand T_PTROBJ
+const X86::Udis86::Operand T_PTROBJ
 const X86::Udis86::Operand* T_PTROBJ
 ud_operand_t	*	T_PTROBJ
 const ud_operand_t	*	T_PTROBJ

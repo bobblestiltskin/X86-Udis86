@@ -6,3 +6,8 @@ Revision history for Perl extension X86::Udis86.
 
 0.02  Thu Nov 18 20:46:25 2010
         - add checks to Makefile.PL for C library and refuse to build unless it exists
+
+1.7.2.1  Sun Oct 27 20:46:25 2013
+        - modify op code to work with 1.7.2 
+          renumber to track udis86
+          add facility to build locally installed version of udis86
